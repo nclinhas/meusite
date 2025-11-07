@@ -1,0 +1,864 @@
+/* ======================================= */
+/* 1. VARIÁVEIS E ESTILOS GERAIS/RESET */
+/* ======================================= */
+
+:root {
+  --color-bg: #0a0a0a;
+  /* Fundo Principal (Preto) */
+  --color-sidebar: #101010;
+  /* Menu Lateral (Preto mais escuro) */
+  --color-highlight: #00f0c8;
+  /* Destaque (Verde PETRONAS) */
+  --color-text: #e0e0e0;
+  /* Texto (Prata/Branco) */
+  --color-link-hover: #ffffff;
+  /* Link Hover (Branco Puro) */
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  /* REMOVA: display: flex; */
+}
+
+.logo-mercedes {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.logo-mercedes img {
+  height: 50px;
+  /* ajuste conforme o tamanho desejado */
+}
+
+
+
+.barra-inferior {
+  margin-top: 40px;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 2px solid var(--color-highlight);
+}
+
+.barra-inferior img {
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.barra-inferior nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.barra-inferior nav a {
+  color: var(--color-highlight);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  position: relative;
+}
+
+.barra-inferior nav a.ativo {
+  text-decoration: underline;
+  color: var(--color-link-hover);
+}
+
+
+
+/* Animação de fundo sutil (Se você quiser manter o fundo animado, descomente esta seção) */
+/*
+body {
+    background: linear-gradient(120deg, var(--color-bg), var(--color-sidebar));
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+*/
+
+h1,
+h2 {
+  color: var(--color-text);
+}
+
+/* ======================================= */
+/* 2. MENU LATERAL (SIDEBAR) */
+/* ======================================= */
+
+.menu-lateral {
+  width: 220px;
+  background-color: var(--color-sidebar);
+  padding: 30px 20px;
+  border-right: 2px solid var(--color-highlight);
+
+  /* Mantenha o posicionamento fixo */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Garante que fique na esquerda */
+  height: 100vh;
+  /* Ocupa toda a altura da viewport */
+  box-sizing: border-box;
+  z-index: 10;
+  /* Garante que ele fique acima de outros elementos */
+}
+
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-lateral li {
+  margin-bottom: 25px;
+}
+
+.menu-lateral a {
+  text-decoration: none;
+  color: var(--color-highlight);
+  font-weight: bold;
+  font-size: 1.1em;
+  position: relative;
+  /* Transições para cores e transformações */
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  /* Necessário para a transformação */
+}
+
+/* Efeito Hover/Ativo - Linha inferior e Cores */
+.menu-lateral a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  /* Posição da linha */
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-highlight);
+  /* Inicia invisível e com escala 0 */
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.menu-lateral a:hover {
+  color: var(--color-link-hover);
+  transform: translateX(5px);
+  /* Move sutilmente para a direita */
+}
+
+.menu-lateral a:hover::after {
+  transform: scaleX(1);
+  /* Expande a linha */
+}
+
+/* Estilo para o link da página atual */
+.menu-lateral a.ativo {
+  color: var(--color-link-hover);
+}
+
+.menu-lateral a.ativo::after {
+  transform: scaleX(1);
+  /* Mantém a linha sob o link ativo */
+  background-color: var(--color-link-hover);
+}
+
+
+/* ======================================= */
+/* 3. CONTEÚDO PRINCIPAL (Main) - Fixo */
+/* ======================================= */
+
+.conteudo-principal,
+.content {
+  /* flex: 1; - REMOVA, pois o body não é mais flex */
+  padding: 40px;
+  animation: fadeIn 1s ease-in;
+
+  /* ADICIONE esta margem para compensar o menu lateral */
+  margin-left: 220px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: var(--color-highlight);
+  /* Destaque no título */
+}
+
+/* ======================================= */
+/* 4. SEÇÃO HOME (index.html) */
+/* ======================================= */
+
+.imagem-destaque img {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 240, 200, 0.3);
+  /* Animação de Hover */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.imagem-destaque img:hover {
+  transform: scale(1.02);
+  /* Escala um pouco menos para ser mais sutil */
+  box-shadow: 0 0 35px rgba(0, 240, 200, 0.6);
+}
+
+.info {
+  margin-top: 40px;
+}
+
+.info h2 {
+  color: var(--color-highlight);
+  margin-bottom: 15px;
+}
+
+.info ul {
+  list-style: none;
+  /* Muda para um visual mais limpo */
+  padding-left: 0;
+}
+
+.info li {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  position: relative;
+  /* ícone sutil */
+  opacity: 1;
+  /* Remove a opacidade para evitar conflito com a animação JS */
+  transition: color 0.3s ease;
+}
+
+.info li:hover {
+  color: var(--color-highlight);
+}
+
+.info li::before {
+  content: '▶';
+  /* Símbolo moderno ou use um ícone de estrela '★' */
+  color: var(--color-highlight);
+  position: absolute;
+  left: 0;
+  font-size: 0.8em;
+  top: 2px;
+}
+
+
+/* ======================================= */
+/* 5. SEÇÃO NOTÍCIAS (news.html) */
+/* ======================================= */
+
+.news-grid {
+  display: grid;
+  /* Layout responsivo com 3 colunas padrão, mas flexível */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.news-card {
+  background-color: var(--color-sidebar);
+  border: 1px solid rgba(0, 240, 200, 0.2);
+  border-radius: 10px;
+  padding: 0;
+  text-align: left;
+  overflow: hidden;
+  cursor: pointer;
+  /* Animação para o card e efeito de clique */
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-8px);
+  /* Levanta o card */
+  box-shadow: 0 10px 30px rgba(0, 240, 200, 0.3);
+  /* Sombra de destaque */
+}
+
+/* Preparação para Animação JavaScript (Fade-in ao rolar) */
+.news-card.hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.news-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.news-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  /* Garante que a imagem preencha o espaço sem distorcer */
+  border-radius: 10px 10px 0 0;
+  transition: opacity 0.3s;
+}
+
+.news-card-content {
+  padding: 15px 20px;
+}
+
+.news-card h2 {
+  margin: 10px 0 5px 0;
+  font-size: 1.4em;
+  color: var(--color-highlight);
+}
+
+.news-card p {
+  color: #ccc;
+  font-size: 0.95em;
+}
+
+.video-section {
+  margin-top: 50px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.video-section iframe {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  border: 4px solid var(--color-highlight);
+  border-radius: 12px;
+  /* Sombra sutil para o vídeo */
+  box-shadow: 0 0 25px rgba(0, 240, 200, 0.4);
+}
+
+/* ======================================= */
+/* 6. RESPONSIVIDADE */
+/* ======================================= */
+
+@media (max-width: 900px) {
+  body {
+    /* Remove o layout flex horizontal para mobile */
+    display: block;
+  }
+
+  .menu-lateral {
+    /* Transforma o menu em uma barra superior horizontal */
+    width: 100%;
+    height: auto;
+    padding: 15px 0;
+    position: static;
+    border-right: none;
+    border-bottom: 2px solid var(--color-highlight);
+    text-align: center;
+  }
+
+  .menu-lateral nav ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .menu-lateral li {
+    margin-bottom: 0;
+  }
+
+  .conteudo-principal,
+  .content {
+    padding: 20px;
+  }
+
+  .video-section iframe {
+    height: 300px;
+    /* Altura menor para telas pequenas */
+  }
+}
+
+/* Oculta o iframe em telas muito pequenas (opcional) */
+@media (max-width: 500px) {
+  .video-section iframe {
+    display: none;
+  }
+}
+
+
+/* classifi*/
+/* Reset básico */
+.page-classificacao{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f1c1f;
+  margin: 0;
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* Título */
+h1 {
+  text-align: center;
+  color: #00b3b3;
+  margin-bottom: 30px;
+}
+
+/* Menu lateral */
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100%;
+  background-color: #0d2c2f;
+  padding-top: 20px;
+}
+
+.menu-lateral nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-lateral nav ul li {
+  margin: 15px 0;
+}
+
+.menu-lateral nav ul li a {
+  color: #00b3b3;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: block;
+  transition: background 0.3s;
+}
+
+.menu-lateral nav ul li a:hover {
+  background-color: #145c5f;
+}
+
+/* Tabela */
+table {
+  margin-left: 200px;
+  width: calc(100% - 220px);
+  border-collapse: collapse;
+  background-color: #1a2a2d;
+  border: 1px solid #00b3b3;
+  border-radius: 8px;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+thead {
+  background-color: #00b3b3;
+  color: #ffffff;
+}
+
+thead th {
+  padding: 12px;
+  text-align: left;
+  font-size: 16px;
+  border-right: 1px solid #1a2a2d;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #2f4f52;
+  border-right: 1px solid #2f4f52;
+}
+
+tbody tr:hover {
+  background-color: #145c5f;
+}
+
+/* Destaque para equipe Mercedes */
+tr.mercedes {
+  background-color: #145c5f;
+  font-weight: bold;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+  .menu-lateral {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  table {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+
+
+/* ======================================= */
+/* ESTILOS ESPECÍFICOS: PÁGINA CLASSIFICAÇÃO */
+/* ======================================= */
+
+.page-classificacao {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f1c1f; /* Aplica o fundo escuro específico da classificação */
+  margin: 0;
+  padding: 20px;
+  color: #ffffff;
+}
+/* ... O restante do seu CSS para a classificação segue abaixo ... */
+/* Ajuste os seletores abaixo se necessário, mas o principal é o BODY */
+
+/* Título */
+.page-classificacao h1 {
+  text-align: center;
+  color: #00b3b3;
+  margin-bottom: 30px;
+}
+
+/* Menu lateral (Ajuste o seletor para garantir que a cor se aplique) */
+.page-classificacao .menu-lateral {
+  /* ... o resto do CSS do .menu-lateral para a classificação ... */
+  background-color: #0d2c2f;
+  /* e assim por diante para a tabela... */
+}
+
+/* Tabela */
+.page-classificacao table {
+  margin-left: 200px;
+  /* ... */
+}
+/* ... e assim por diante para os outros seletores */
+
+
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------
+   ESTILIZAÇÃO DAS FOTOS DOS PILOTOS
+   -------------------------------------- */
+
+/* Container da Imagem e Nome */
+.piloto-info {
+    /* Ativa o Flexbox para alinhar horizontalmente a foto e o nome */
+    display: flex;
+    align-items: center; /* Alinha verticalmente no centro */
+    gap: 10px; /* Espaço entre a foto e o nome */
+    font-weight: bold;
+    text-align: left;
+    padding-left: 10px; /* Alinha com o cabeçalho 'Piloto' */
+}
+
+/* Estilização da Imagem do Piloto */
+.piloto-foto {
+    width: 40px; /* Tamanho do Avatar (ajuste se desejar) */
+    height: 40px;
+    object-fit: cover; /* Garante que a imagem preencha sem distorcer */
+    border-radius: 50%; /* Transforma a imagem em um círculo */
+    border: 2px solid #00b3b3; /* Borda da cor de destaque */
+}
+
+/* --------------------------------------
+   AJUSTES FINAIS NA TABELA
+   -------------------------------------- */
+
+/* Alinhamento do cabeçalho "Piloto" */
+thead th:nth-child(2) {
+    text-align: left;
+    padding-left: 10px; /* Alinha o texto do cabeçalho com a célula do piloto */
+}
+
+/* Garante que o conteúdo da célula da tabela esteja centralizado verticalmente */
+tbody td {
+    vertical-align: middle;
+    /* Aumente o padding ou altura para acomodar a foto de 40px confortavelmente */
+    padding: 8px 10px; 
+}
+
+
+/* ======================================= */
+/* 7. RODAPÉ (FOOTER) - NOVO ESTILO CENTRALIZADO COM HOVER BRANCO */
+/* ======================================= */
+
+.footer-mercedes-f1 {
+    /* Usa a cor do seu menu lateral para manter o tema escuro */
+    background-color: var(--color-sidebar); 
+    color: var(--color-text);
+    /* Ajustamos o padding para centralizar visualmente */
+    padding: 35px 20px; 
+    
+    /* ESSENCIAL: Alinha o rodapé com a largura do seu conteúdo principal */
+    margin-left: 220px; 
+    
+    /* Borda de destaque (Verde PETRONAS) */
+    border-top: 3px solid var(--color-highlight); 
+}
+
+/* Container que envolve o texto e os ícones */
+.footer-social-section {
+    /* ADICIONADO: Flexbox para alinhar o conteúdo interno */
+    display: flex;
+    flex-direction: column; 
+    align-items: center; /* Centraliza horizontalmente o texto e o bloco de ícones */
+    max-width: 1000px; 
+    margin: 0 auto 30px auto; /* Centraliza o bloco na horizontal e adiciona margem inferior */
+    text-align: center;
+}
+
+/* Estilo do Título "Follow Us" */
+.footer-social-section h4 {
+    color: var(--color-text); 
+    /* Procure por esta linha e mude o valor: */
+    font-size: 2.5em; /* Valor que deixa a letra bem grande */
+    margin-bottom: 5px;
+}
+
+/* Estilo do Texto Descritivo */
+.footer-social-section p {
+    color: #ccc; 
+    /* Procure por esta linha e mude o valor: */
+    font-size: 1.1em; /* Valor que deixa a letra um pouco maior */
+    margin-top: 0;
+    margin-bottom: 25px; 
+}
+
+/* Container dos Ícones */
+.social-icons {
+    display: flex;
+    justify-content: center; /* Centraliza os ícones */
+    gap: 15px; /* Espaço entre cada ícone */
+    margin-top: 0; /* Remove margem superior desnecessária */
+}
+
+/* Estilo dos Links e Imagens dos Ícones */
+.social-icons a {
+    display: block;
+    transition: all 0.3s ease-in-out; 
+    border-radius: 5px; 
+    padding: 5px; 
+    line-height: 0;
+}
+
+.social-icons img {
+    width: 32px; 
+    height: 32px;
+    display: block;
+    filter: brightness(0.9);
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* --- EFEITO HOVER (Brilho Branco) --- */
+
+.social-icons a:hover {
+    transform: translateY(-3px); /* Move levemente para cima */
+    
+    /* Efeito de Borda e Brilho Branco, usando sua variável --color-link-hover */
+    box-shadow: 0 0 0 1px var(--color-link-hover), /* Borda fina */
+                0 0 15px rgba(255, 255, 255, 0.7); /* Brilho neon branco */
+    
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo sutil */
+}
+
+.social-icons a:hover img {
+    filter: brightness(1.2); /* Aumenta o brilho da imagem ao passar o mouse */
+    /* Garante que o ícone em si não sofra a transformação, apenas o bloco <a> */
+    transform: none; 
+}
+
+/* --- Estilos das Seções de Links do Rodapé (mantidos) --- */
+.footer-links-section {
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+    margin: 20px 0;
+    padding: 20px 0;
+    border-top: 1px solid #333;
+}
+/* ... o restante das classes de link do rodapé ... */
+
+/* Linha Final */
+.footer-bottom {
+    text-align: center;
+    font-size: 0.8em;
+    padding: 10px 0 20px;
+    color: #666666; 
+}
+
+
+/* ======================================= */
+/* 8. RESPONSIVIDADE DO RODAPÉ (AJUSTADO) */
+/* ======================================= */
+
+@media (max-width: 900px) {
+    .footer-mercedes-f1 {
+        margin-left: 0; /* Ocupa a largura total */
+    }
+    /* O restante do seu código responsivo já está ótimo para telas menores */
+}
+
+/* Mantenha o seu último media query original intacto. */
+@media (max-width: 500px) {
+    .footer-social-section {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .footer-col {
+        width: 100%; /* Uma coluna por linha em telas muito pequenas */
+        text-align: center;
+        margin: 10px 0;
+    }
+    .footer-col h4 {
+        border-bottom: 1px solid #333;
+    }
+}
+
+
+/* ======================================= */
+/* 10. CARROSSEL DE CARROS (SLIDER)        */
+/* ======================================= */
+
+.car-carousel-section {
+    margin: 50px 0;
+    padding: 0;
+}
+
+.carousel-container {
+    /* Define o limite do carrossel e permite posicionar as setas */
+    position: relative;
+    max-width: 1000px; /* Ajuste o tamanho máximo se necessário */
+    margin: 0 auto;
+    overflow: hidden; /* Esconde as imagens que não estão ativas */
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-slides {
+    /* O container de slides deve ser flexível para o JavaScript mover */
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Suavidade na transição */
+    width: 100%; /* Ajustado pelo JS */
+    height: auto;
+}
+
+.carousel-img {
+    width: 100%;
+    min-width: 100%; /* Garante que cada imagem ocupe 100% do container */
+    height: auto;
+    display: none; /* Inicia todas ocultas (será controlado pelo JS) */
+    object-fit: cover;
+}
+
+.carousel-img.active {
+    display: block; /* Apenas a imagem ativa é visível */
+}
+
+
+/* Estilização das Setas (O MAIS IMPORTANTE) */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    /* Cores e formato da seta - conforme sua imagem */
+    background-color: var(--color-highlight); /* Verde PETRONAS */
+    color: var(--color-sidebar); /* Texto/Seta em cor escura */
+    
+    border: none;
+    border-radius: 50%; /* Círculo */
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 2.5em; 
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5px; /* Ajuste visual do ícone */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s, transform 0.2s;
+    z-index: 5; /* Garante que a seta fique sobre a imagem */
+}
+
+.carousel-btn:hover {
+    background-color: #00ffc8; /* Um tom ligeiramente mais claro ou var(--color-link-hover) se quiser branco */
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn-carrossel {
+    left: 20px;
+}
+
+.next-btn-carrossel {
+    right: 20px;
+}
+
+/* Garante que o ícone da seta esteja na cor correta */
+.arrow-icon-carrossel {
+    color: var(--color-sidebar); 
+    line-height: 1; /* Alinhamento da seta */
+}
+
+
+
+/* car */
+/* Estilos Específicos para a Ficha Técnica do Carro */
+.specs-grid {
+    display: grid;
+    /* 3 colunas em telas grandes */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.spec-card {
+    background-color: var(--color-sidebar);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 3px solid var(--color-highlight);
+    transition: transform 0.3s ease;
+}
+
+.spec-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 240, 200, 0.2);
+}
+
+.spec-card h3 {
+    color: var(--color-highlight);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 240, 200, 0.1);
+    padding-bottom: 5px;
+}
+
+.spec-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.spec-card li {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+/* Responsividade para a Ficha Técnica */
+@media (max-width: 900px) {
+    .specs-grid {
+        /* 1 coluna em telas menores */
+        grid-template-columns: 1fr; 
+    }
+}
